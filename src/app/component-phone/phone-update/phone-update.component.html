@@ -1,0 +1,54 @@
+
+
+<div class="container bootstrap snippets bootdey">
+
+    <div class="row" style="margin-top: 15px">
+
+      <app-caroussel></app-caroussel>
+
+      <div class="card border-info bg-light  mb-3" style="max-width: 100rem;">
+        <div class="card-header">Update Phone</div>
+        <div class="card-body">
+          <form class="row g-3 needs-validation" novalidate #phoneForm="ngForm" (ngSubmit)="update()">
+            <div class="col-md-1">
+             
+                <input type="text" class="form-control" [(ngModel)]="phone.id" name="id" placeholder="Id" required readonly>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            <div class="col-md-3">
+             
+              <input type="text" class="form-control" [(ngModel)]="phone.mark" name="mark" placeholder="Mark" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-2">
+             
+              <input type="text" class="form-control" [(ngModel)]="phone.price" name="price" placeholder="Price" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-3">
+              
+              <input type="text" class="form-control" [(ngModel)]="phone.imageUrl" name="imageUrl" placeholder="Image Url" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-primary" type="submit" [disabled]="!phoneForm.form.valid">Update</button>&nbsp;
+              <button class="btn btn-info" routerLink="/all-phone">Cancel</button>
+            </div>
+            <!--div class="col-12">
+              <button class="btn btn-primary" type="submit">Submit form</button>
+            </!--div-->
+          </form>
+        </div>
+      </div>
+    
+      </div>
+     
+  </div>

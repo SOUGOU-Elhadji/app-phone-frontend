@@ -1,0 +1,44 @@
+<h1 mat-dialog-title style="text-align: center;">Add Phone</h1>
+<img src="assets/banner.png" class="d-block w-100" style="height: 100px; border-radius: 0.5rem;" alt="">
+  <hr>
+<div mat-dialog-content>
+    <form>
+        <mat-form-field appearance="outline">
+            <mat-label>Mark</mat-label>
+            <input matInput placeholder="Mark phone" required>
+            <!--mat-icon matSuffix>sentiment_very_satisfied</!--mat-icon-->
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" class="example-right-align" placeholder="0" required>
+            <span matSuffix>.00&nbsp;FCFA</span>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select [(ngModel)]="selectedValue" name="food">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline">
+            <mat-label>ImageURL</mat-label>
+            <input matInput placeholder="ImageURL" required>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="size">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Description" required></textarea>
+            <mat-hint>emsexpress</mat-hint>
+        </mat-form-field>
+        <hr>
+        <div>
+            <button mat-raised-button color="primary" (click)="addPhone()">Add Phone</button>
+            &nbsp;&nbsp;
+            <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

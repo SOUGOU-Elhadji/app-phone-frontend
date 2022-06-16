@@ -1,0 +1,149 @@
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+
+<div class="container bootstrap snippets bootdey">
+
+  <div class="row" style="margin-top: 15px">
+
+    <app-caroussel></app-caroussel>
+
+    <div class="card border-info bg-light  mb-3" style="max-width: 100rem;">
+      <div class="card-header">Add Phone</div>
+      <div class="card-body">
+        <form class="row g-3 needs-validation" novalidate #phoneForm="ngForm" (ngSubmit)="savePhone()">
+          <div class="col-md-1">
+            <input type="color" class="form-control form-control-color" id="color" name="color" [(value)]="phone"
+              title="Choose your color">
+          </div>
+          <!--div class="col-md-1">
+        <input type="text" class="form-control form-control-color" [(ngModel)]="phone.color" id="color" name="color" title="Choose your color"> 
+      </!--div-->
+          <div class="col-md-3">
+
+            <input type="text" class="form-control" [(ngModel)]="phone.mark" name="mark" placeholder="Mark" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          <div class="col-md-3">
+
+            <input type="text" class="form-control" [(ngModel)]="phone.price" name="price" placeholder="Price" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          <div class="col-md-3">
+
+            <input type="text" class="form-control" [(ngModel)]="phone.imageUrl" name="imageUrl" placeholder="Image Url"
+              required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <button class="btn btn-primary" type="submit" [disabled]="!phoneForm.form.valid">Save</button>
+          </div>
+          <!--div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </!--div-->
+        </form>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-lg-3" *ngFor="let p of phones | paginate: { itemsPerPage: 4, currentPage: p }">
+      <div class="card" style="width: 10rem;" style="margin-top: 50px">
+        <img [src]="p.imageUrl" class="card-img-top" style="width: 100%; height: 220px;" alt="">
+        <div class="card-body">
+          <h5 class="card-title">{{ p.mark }}</h5>
+          <p class="card-text"><img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/20/000000/external-price-golf-flaticons-lineal-color-flat-icons.png"/>&nbsp; {{ p.price | number }} FCFA</p>
+          <a class="btn btn-white" (click)="open(content,p)"><img
+              src="https://img.icons8.com/office/18/000000/details.png" /></a>&nbsp;
+          <a (click)="deletePhone(p.id)" class="btn btn-white"><img
+              src="https://img.icons8.com/fluency/18/000000/filled-trash.png" /></a>&nbsp;
+          <a (click)="updatePhone(p.id)" class="btn btn-white"><img
+              src="https://img.icons8.com/cotton/18/000000/loop.png" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <pagination-controls class="page my-pagination" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+<!--ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-6">
+        <div class="row" style="margin-top: 50px">
+          <h3 style="text-align: center">Update Phone</h3>
+          <form class="row g-3 needs-validation" novalidate #phoneForm="ngForm" (ngSubmit)="update()">
+
+
+            <div class="row g-3">
+              <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="phone.id" name="id" placeholder="Id" required readonly>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="phone.mark" name="mark" placeholder="Mark" required>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="phone.price" name="price" placeholder="Price" required>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="phone.imageUrl" name="imageUrl" placeholder="Image Url" required>
+              </div>
+            </div>
+          </form>
+          </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    
+    <button class="btn btn-primary" type="submit" [disabled]="!phoneForm.form.valid" (click)="modal.close('Save click')">Update</button>&nbsp;
+    <button class="btn btn-info" routerLink="/all-phone">Cancel</button>
+  </div>
+</!--ng-template-->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ phoneClicked.mark }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img [src]="phoneClicked.imageUrl" class="card-img-top" style="width: 100%; height: 180px;" alt="">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <!--h6 class="card-title">Description :</!--h6-->
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional.</p>
+            <p class="card-text"><small class="text-muted">Price : {{ phoneClicked.price }} FCFA</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--div class="modal-footer">
+    
+    <button class="btn btn-primary" type="submit" [disabled]="!phoneForm.form.valid" (click)="modal.close('Save click')">Update</button>&nbsp;
+    <button class="btn btn-info" routerLink="/all-phone">Cancel</button>
+  </!--div-->
+</ng-template>
+
+
+<pre>{{ closeResult }}</pre>
